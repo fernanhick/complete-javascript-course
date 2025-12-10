@@ -29,7 +29,9 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -45,3 +47,31 @@ const restaurant = {
     },
   },
 };
+
+//Array destructuring, when destructuring and array the original array is not mutated
+const arr = [2, 3, 4];
+const [x, y, z] = arr;
+console.log(x, y, z);
+//This will destructure and skip the second value
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
+
+//Switching variables
+//this will change the position of the values
+[main, secondary] = [secondary, main];
+
+//Execute order function from object restaurant
+const [starter, mainCourse] = restaurant.order(2, 0);
+console.log(starter, mainCourse);
+
+// Destructuring nested values
+const nested = [2, 4, [5, 6]];
+//This will destructure the initial array but display the inner array
+const [i, , j] = nested;
+const [l, , [m, n]] = nested;
+console.log(l, m, n);
+
+//Default values
+//This will assign a value to the variable if the destructuring does not contain the same amount of value
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r);
